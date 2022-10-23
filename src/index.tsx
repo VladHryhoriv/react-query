@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { worker } from '@uidotdev/react-query-api';
 
 import { App } from './App';
@@ -8,6 +9,7 @@ import { reportWebVitals } from './reportWebVitals';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+const client = new QueryClient();
 
 new Promise((res) => setTimeout(res, 100))
   .then(() =>
@@ -19,7 +21,9 @@ new Promise((res) => setTimeout(res, 100))
   .then(() => {
     root.render(
       <React.StrictMode>
-        <App />
+        <QueryClientProvider client={client}>
+          <App />
+        </QueryClientProvider>
       </React.StrictMode>
     );
   });
