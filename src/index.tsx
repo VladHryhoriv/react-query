@@ -6,6 +6,9 @@ import { worker } from '@uidotdev/react-query-api';
 import { App } from './App';
 import { reportWebVitals } from './reportWebVitals';
 
+// Styles
+import './index.css';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
