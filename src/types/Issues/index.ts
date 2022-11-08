@@ -1,3 +1,12 @@
+import { Issue } from 'enities/Issue.entity';
+
+export type IssueStatus =
+  | 'backlog'
+  | 'todo'
+  | 'in-progress'
+  | 'done'
+  | 'cancelled';
+
 export interface IssueDTO {
   id: string;
   title: string;
@@ -5,11 +14,11 @@ export interface IssueDTO {
   assignee: string;
   commentCount: number;
   createdBy: string;
-  createdDate: string;
-  labels: string;
-  status: string;
+  createdDate: Date;
+  labels: Array<string>;
+  status: IssueStatus;
 }
 
 export interface IssuesListDTO {
-  items: Array<IssueDTO>;
+  items: Array<Issue>;
 }
