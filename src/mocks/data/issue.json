@@ -1,0 +1,14 @@
+{
+	"labels": ["bug"],
+	"assignee": "user_1",
+	"createdBy": "string",
+	"id": "1",
+	"title": "React bug with Redux",
+	"number": "998",
+	"commentCount": "3",
+	"createdDate": "Thu Nov 17 2022 22:16:57 GMT+0200 (за східноєвропейським стандартним часом)",
+	"completedDate": "Thu Nov 17 2022 22:16:57 GMT+0200 (за східноєвропейським стандартним часом)",
+	"dueDate": "Thu Nov 17 2022 22:16:57 GMT+0200 (за східноєвропейським стандартним часом)",
+	"status": "done",
+	"comments": ["c_406", "c_102"]
+}

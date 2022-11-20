@@ -1,5 +1,10 @@
 export enum QUERY_SCOPES {
-  issues = 'issues'
+  issues = 'issues',
+  labels = 'labels',
+  users = 'users'
 }
 
-export enum QUERY_ENTITIES {}
+export enum QUERY_ENTITIES {
+  comments = 'comments',
+  user = 'user'
+}

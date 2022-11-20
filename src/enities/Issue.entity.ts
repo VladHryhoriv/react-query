@@ -3,9 +3,13 @@ import {
   deserialize,
   identifier,
   list,
+  object,
   primitive,
   serializable
 } from 'serializr';
+
+import { Label } from './Label.entity';
+import { User } from './User.entity';
 
 export class Issue {
   @serializable(identifier())
@@ -17,14 +21,14 @@ export class Issue {
   @serializable
   number = 0;
 
-  @serializable(identifier())
-  assignee = '';
+  @serializable(object(User))
+  assignee: User | null = null;
 
   @serializable
   commentCount = 0;
 
-  @serializable(identifier())
-  createdBy = '';
+  @serializable(object(User))
+  createdBy: User | null = null;
 
   @serializable(date())
   createdDate = new Date();
@@ -35,8 +39,8 @@ export class Issue {
   @serializable(date())
   dueDate = new Date();
 
-  @serializable(list(primitive()))
-  labels: string[] = [];
+  @serializable(list(object(Label)))
+  labels: Label[] = [];
 
   @serializable
   status = '';
@@ -45,7 +49,6 @@ export class Issue {
   comments: string[] = [];
 
   static deserialize(data: Object | string): Issue {
-    console.log('type', typeof data);
     return deserialize(Issue, data);
   }
 

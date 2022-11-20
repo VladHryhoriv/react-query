@@ -1,0 +1,12 @@
+[
+	{
+		"id": "bug",
+		"color": "red",
+		"name": "Bug"
+	},
+	{
+		"id": "feature",
+		"color":"blue",
+		"name": "feature"
+	}
+]

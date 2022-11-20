@@ -1,24 +1,13 @@
 import { Issue } from 'enities/Issue.entity';
 
-export type IssueStatus =
-  | 'backlog'
-  | 'todo'
-  | 'in-progress'
-  | 'done'
-  | 'cancelled';
-
-export interface IssueDTO {
-  id: string;
-  title: string;
-  number: number;
-  assignee: string;
-  commentCount: number;
-  createdBy: string;
-  createdDate: Date;
+export type IssueDTO = {
   labels: Array<string>;
-  status: IssueStatus;
-}
+  assignee: string;
+  createdBy: string;
+} & Omit<Issue, 'labels' | 'assignee' | 'createdBy'>;
 
-export interface IssuesListDTO {
-  items: Array<Issue>;
+export interface IssueRequestParms {
+  number: number;
+  page?: number;
+  limit?: number;
 }
