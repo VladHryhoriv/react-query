@@ -2,5 +2,5 @@ import React, { FC } from 'react';
 import { FaSpinner } from 'react-icons/fa';
 
 export const Loader: FC = () => {
-  return <FaSpinner className='loader' />;
+  return <FaSpinner role='img' arial-live='polite' className='loader' />;
 };

@@ -38,14 +38,24 @@ export const IssueListItem: FC<Props> = (props) => {
     <li onMouseEnter={prefetchComments}>
       <div>
         {status === ('done' || 'cancelled') ? (
-          <GoIssueOpened style={{ color: 'red' }} />
+          <GoIssueOpened
+            style={{ color: 'red' }}
+            role='img'
+            aria-label='Status done'
+          />
         ) : (
-          <GoIssueClosed style={{ color: 'green' }} />
+          <GoIssueClosed
+            style={{ color: 'green' }}
+            role='img'
+            aria-label='Status open'
+          />
         )}
       </div>
       <div className='issue-content'>
-        <span>
-          <Link to={paths.issue(number)}>{title}</Link>
+        <span key={number}>
+          <Link to={paths.issue(number)} role='link'>
+            {title}
+          </Link>
           {labels.map((label) => (
             <span key={label.id} className={`label ${label.color}`}>
               {label.name}
@@ -63,7 +73,7 @@ export const IssueListItem: FC<Props> = (props) => {
           className='assigned-to'
         />
       )}
-      <span className='comment-count'>
+      <span aria-label='Comment count' className='comment-count'>
         <GoComment />
         {commentCount}
       </span>

@@ -13,8 +13,6 @@ export const IssuesPage: FC = () => {
     return <p>{error.message}</p>;
   }
 
-  console.log('data ---->', data);
-
   return (
     <div className='issues'>
       <main>
