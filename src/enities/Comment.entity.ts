@@ -2,16 +2,19 @@ import {
   date,
   deserialize,
   identifier,
+  object,
   primitive,
   serializable
 } from 'serializr';
+
+import { User } from './User.entity';
 
 export class Comment {
   @serializable(identifier())
   id = '';
 
-  @serializable(identifier())
-  createdBy = '';
+  @serializable(object(User))
+  createdBy: User | null = null;
 
   @serializable(date())
   createdDate = new Date();

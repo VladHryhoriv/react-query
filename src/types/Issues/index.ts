@@ -11,3 +11,10 @@ export interface IssueRequestParms {
   page?: number;
   limit?: number;
 }
+
+export type TIssueStatus =
+  | 'backlog'
+  | 'todo'
+  | 'inProgress'
+  | 'done'
+  | 'cancelled';

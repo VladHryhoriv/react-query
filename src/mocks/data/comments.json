@@ -1,0 +1,38 @@
+[
+	{
+		"id": "1",
+		"createdBy": "user_1",
+		"createdDate": "Thu Nov 17 2022 22:16:57 GMT+0200 (за східноєвропейським стандартним часом)",
+		"comment": "Mock comment"
+	},
+	{
+		"id": "2",
+		"createdBy": "user_1",
+		"createdDate": "Thu Nov 17 2022 22:16:57 GMT+0200 (за східноєвропейським стандартним часом)",
+		"comment": "Mock comment"
+	},
+	{
+		"id": "3",
+		"createdBy": "user_1",
+		"createdDate": "Thu Nov 17 2022 22:16:57 GMT+0200 (за східноєвропейським стандартним часом)",
+		"comment": "Mock comment"
+	},
+	{
+		"id": "4",
+		"createdBy": "user_1",
+		"createdDate": "Thu Nov 17 2022 22:16:57 GMT+0200 (за східноєвропейським стандартним часом)",
+		"comment": "Mock comment"
+	},
+	{
+		"id": "5",
+		"createdBy": "user_1",
+		"createdDate": "Thu Nov 17 2022 22:16:57 GMT+0200 (за східноєвропейським стандартним часом)",
+		"comment": "Mock comment"
+	},
+	{
+		"id": "6",
+		"createdBy": "user_1",
+		"createdDate": "Thu Nov 17 2022 22:16:57 GMT+0200 (за східноєвропейським стандартним часом)",
+		"comment": "Mock comment"
+	}
+]

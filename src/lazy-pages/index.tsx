@@ -9,3 +9,11 @@ export const IssuesPage = loadable(
     fallback: <Loader />
   }
 );
+
+export const IssuePage = loadable(
+  () => import(/* webpackChunkName: "issues-page" */ '../pages/Issue'),
+  {
+    resolveComponent: ({ IssuePage }) => IssuePage,
+    fallback: <Loader />
+  }
+);

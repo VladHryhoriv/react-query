@@ -4,8 +4,12 @@ import { QUERY_ENTITIES, QUERY_SCOPES } from './enums';
 
 export const issueKeys = {
   root: [{ scope: QUERY_SCOPES.issues }] as const,
-  comments: (number: Issue['number']) =>
-    [{ ...issueKeys.root[0], number, entity: QUERY_ENTITIES.comments }] as const
+  issue: (number: Issue['number']) =>
+    [{ ...issueKeys.root[0], number, entity: QUERY_ENTITIES.issue }] as const,
+  comments: (number: Issue['number'], page: number) =>
+    [
+      { ...issueKeys.root[0], number, page, entity: QUERY_ENTITIES.comments }
+    ] as const
 };
 
 export const labelsKeys = {

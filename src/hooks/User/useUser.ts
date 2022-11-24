@@ -14,7 +14,7 @@ export const useUser = (
 
       return User.deserialize(user);
     },
-    { ...options }
+    { retry: 1, ...options }
   );
 
   return data;

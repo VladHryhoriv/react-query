@@ -4,18 +4,21 @@ import { labelsKeys } from 'enums/queries';
 import { fetchLabels } from 'services/API';
 
 export const useLabels = (
-  options?: Omit<UseQueryOptions<Label[], Error>, 'queruKey' | 'queryFn'>
-): UseQueryResult<Label[], Error> => {
-  const data = useQuery<Label[], Error>(
+  options?: Omit<
+    UseQueryOptions<Map<Label['id'], Label>, Error>,
+    'queruKey' | 'queryFn'
+  >
+): UseQueryResult<Map<Label['id'], Label>, Error> => {
+  const data = useQuery<Map<Label['id'], Label>, Error>(
     labelsKeys.root,
     async () => {
       const labelsData = await fetchLabels();
 
-      const labels = Label.deserializeAsArray(labelsData);
+      const labels = Label.deserializeAsMap(labelsData);
 
       return labels;
     },
-    { ...options }
+    { retry: 1, ...options }
   );
 
   return data;

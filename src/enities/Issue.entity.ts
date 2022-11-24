@@ -8,6 +8,7 @@ import {
   serializable
 } from 'serializr';
 
+import { TIssueStatus } from '../types/Issues';
 import { Label } from './Label.entity';
 import { User } from './User.entity';
 
@@ -43,7 +44,7 @@ export class Issue {
   labels: Label[] = [];
 
   @serializable
-  status = '';
+  status: TIssueStatus = 'todo';
 
   @serializable(list(primitive()))
   comments: string[] = [];

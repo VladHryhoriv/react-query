@@ -1,18 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { worker } from '@uidotdev/react-query-api';
+import { ErrorBoundary } from 'components/ErrorBoundary/ErrorBoundary';
+import { queryClient } from 'utils/queryClient';
 
 import { App } from './App';
 import { reportWebVitals } from './reportWebVitals';
 
 // Styles
 import './index.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-const client = new QueryClient();
 
 new Promise((res) => setTimeout(res, 100))
   .then(() =>
@@ -24,9 +29,15 @@ new Promise((res) => setTimeout(res, 100))
   .then(() => {
     root.render(
       <React.StrictMode>
-        <QueryClientProvider client={client}>
-          <App />
-        </QueryClientProvider>
+        <ErrorBoundary>
+          <BrowserRouter>
+            <QueryClientProvider client={queryClient}>
+              <App />
+              <ToastContainer />
+              {process.env.NODE_ENV === 'development' && <ReactQueryDevtools />}
+            </QueryClientProvider>
+          </BrowserRouter>
+        </ErrorBoundary>
       </React.StrictMode>
     );
   });

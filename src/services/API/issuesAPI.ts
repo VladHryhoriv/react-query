@@ -1,5 +1,6 @@
-import { Comment } from 'enities/Comment.entity';
+import { Issue } from 'enities/Issue.entity';
 import queryString from 'query-string';
+import { CommentDTO } from 'types/Comment';
 import { IssueDTO, IssueRequestParms } from 'types/Issues';
 import { api } from 'utils/APIHandler';
 
@@ -15,12 +16,16 @@ export const fetchIssues = (): Promise<IssueDTO[]> => {
   return api<IssueDTO[]>('/api/issues');
 };
 
+export const fetchIssue = (number: Issue['number']): Promise<IssueDTO> => {
+  return api<IssueDTO>(`/api/issues/${number}`);
+};
+
 export const fetchIssueComments = (
   params: IssueRequestParms
-): Promise<Comment[]> => {
+): Promise<CommentDTO[]> => {
   const { number } = params;
 
   const requestParams = queryString.stringify(params);
 
-  return api<Comment[]>(`/api/issues/${number}/comments?${requestParams}`);
+  return api<CommentDTO[]>(`/api/issues/${number}/comments?${requestParams}`);
 };

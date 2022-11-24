@@ -1,12 +1,15 @@
 import { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { paths } from 'config/paths';
 import { Issue } from 'enities/Issue.entity';
+import { User } from 'enities/User.entity';
 import { relativeDate } from 'utils/relativeDate';
 
 import { IssueListItem } from '../IssueListItem';
 
-const user = {
+const user: User = {
   id: '1',
   name: 'Rob',
   profilePictureUrl:
@@ -73,11 +76,21 @@ describe('IssueListItem', () => {
     expect(userImg).toBeInTheDocument();
   });
 
-  it('render correct comments count', () => {
+  it('it render correct comments count', () => {
     render(<MockIssueListItem {...issue} />);
 
     const commentElement = screen.getByText(issue.commentCount.toString());
 
     expect(commentElement).toBeInTheDocument();
+  });
+
+  it('it redirect to issue page', () => {
+    render(<MockIssueListItem {...issue} />);
+
+    const link = screen.getByRole('link');
+
+    userEvent.click(link);
+
+    expect(window.location.pathname).toBe('/' + paths.issue(issue.number));
   });
 });
