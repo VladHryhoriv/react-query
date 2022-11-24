@@ -7,12 +7,15 @@ import { fetchIssues } from 'services/API';
 import { queryClient } from 'utils/queryClient';
 
 export const useIssues = (
+  search: string = '',
+  label: string[] = [],
+  status: string = '',
   options?: Omit<UseQueryOptions<Issue[], Error>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<Issue[], Error> => {
   const data = useQuery<Issue[], Error>(
-    issueKeys.root,
+    issueKeys.issuesSearch(search, label, status),
     async () => {
-      const issues = await fetchIssues();
+      const issues = await fetchIssues({ search, label, status });
       const users = queryClient.getQueryData<
         ReturnType<typeof User.deserializeAsMap>
       >(userKeys.root);

@@ -1,30 +1,53 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { toast } from 'react-toastify';
 import { IssueListItem } from 'components/IssueListItem';
+import { SingleForm } from 'components/SingleForm';
 import { useIssues } from 'hooks/Issues/useIssues';
 
 export const IssuesPage: FC = () => {
-  const { data, isLoading, isError, error } = useIssues();
+  const [search, setSearch] = useState<string>('');
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  const { data, isLoading, isError, error } = useIssues(search);
 
-  if (isError) {
-    return <p>{error.message}</p>;
-  }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // @ts-ignore
+    setSearch(e.target.search.value);
+  };
+
+  const renderList = () => {
+    if (isLoading) {
+      return <p>Loading...</p>;
+    }
+
+    if (isError) {
+      toast.error(error.message);
+      throw new Error(error.message);
+    }
+
+    return (
+      <div>
+        <ul className='issues-list'>
+          {data?.map((issue) => (
+            <IssueListItem key={issue.id} {...issue} />
+          ))}
+        </ul>
+      </div>
+    );
+  };
 
   return (
     <div className='issues'>
       <main>
         <section>
           <h1>Issues</h1>
-          <div>
-            <ul className='issues-list'>
-              {data?.map((issue) => (
-                <IssueListItem key={issue.id} {...issue} />
-              ))}
-            </ul>
-          </div>
+          <SingleForm
+            onSubmit={handleSubmit}
+            name='search'
+            label='Search'
+            placeholder='Search'
+          />
+          {renderList()}
         </section>
       </main>
     </div>

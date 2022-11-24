@@ -9,6 +9,15 @@ export const issueKeys = {
   comments: (number: Issue['number'], page: number) =>
     [
       { ...issueKeys.root[0], number, page, entity: QUERY_ENTITIES.comments }
+    ] as const,
+  issuesSearch: (search?: string, label?: string[], status?: string) =>
+    [
+      {
+        ...issueKeys.root[0],
+        search,
+        label,
+        status
+      }
     ] as const
 };
 
