@@ -24,7 +24,7 @@ export const App: FC = () => {
     <div className='container'>
       <div className='App'>
         {!isRootPage && <Link to={paths.issues()}>Back to Issues List</Link>}
-
+        <h1>Issue Tracker</h1>
         <Routes>
           <Route path={paths.issues()} element={<IssuesPage />} />
           <Route path={paths.issue()} element={<IssuePage />} />

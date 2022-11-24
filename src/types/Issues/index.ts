@@ -7,9 +7,9 @@ export type IssueDTO = {
 } & Omit<Issue, 'labels' | 'assignee' | 'createdBy'>;
 
 export interface IssuesRequestParams {
-  search?: string;
-  label?: string[];
-  status?: string;
+  search: string;
+  labels: string[];
+  status: string;
 }
 export interface IssueRequestParms {
   number: number;

@@ -4,18 +4,17 @@ import { Label } from 'enities/Label.entity';
 import { User } from 'enities/User.entity';
 import { issueKeys, labelsKeys, userKeys } from 'enums/queries';
 import { fetchIssues } from 'services/API';
+import { IssuesRequestParams } from 'types/Issues';
 import { queryClient } from 'utils/queryClient';
 
 export const useIssues = (
-  search: string = '',
-  label: string[] = [],
-  status: string = '',
+  params: IssuesRequestParams,
   options?: Omit<UseQueryOptions<Issue[], Error>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<Issue[], Error> => {
   const data = useQuery<Issue[], Error>(
-    issueKeys.issuesSearch(search, label, status),
+    issueKeys.issuesSearch(params),
     async () => {
-      const issues = await fetchIssues({ search, label, status });
+      const issues = await fetchIssues(params);
       const users = queryClient.getQueryData<
         ReturnType<typeof User.deserializeAsMap>
       >(userKeys.root);

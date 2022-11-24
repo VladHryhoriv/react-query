@@ -1,4 +1,5 @@
 import { Issue } from 'enities/Issue.entity';
+import { IssuesRequestParams } from 'types/Issues';
 
 import { QUERY_ENTITIES, QUERY_SCOPES } from './enums';
 
@@ -10,13 +11,11 @@ export const issueKeys = {
     [
       { ...issueKeys.root[0], number, page, entity: QUERY_ENTITIES.comments }
     ] as const,
-  issuesSearch: (search?: string, label?: string[], status?: string) =>
+  issuesSearch: (params: IssuesRequestParams) =>
     [
       {
         ...issueKeys.root[0],
-        search,
-        label,
-        status
+        ...params
       }
     ] as const
 };

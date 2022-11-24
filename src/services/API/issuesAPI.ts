@@ -17,7 +17,8 @@ export const fetchIssues = (
 
   const requestParams = queryString.stringify(params, {
     skipEmptyString: true,
-    skipNull: true
+    skipNull: true,
+    arrayFormat: 'bracket'
   });
 
   return api<IssueDTO[]>(`/api/issues${requestParams && `?${requestParams}`}`);
