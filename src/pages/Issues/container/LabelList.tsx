@@ -26,6 +26,7 @@ export const LabelList: FC<Props> = ({ onClick, selected }) => {
       <ul className='labels'>
         {Array.from(data?.values() || []).map((label) => (
           <LabelButton
+            key={label.id}
             onClick={onClick}
             isSelected={selected.includes(label.id)}
             {...label}

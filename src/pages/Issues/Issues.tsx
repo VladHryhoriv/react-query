@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { IssueListItem } from 'components/IssueListItem';
 import { SingleForm } from 'components/SingleForm';
@@ -7,6 +8,7 @@ import { useIssues } from 'hooks/Issues/useIssues';
 import { IssuesRequestParams } from 'types/Issues';
 
 import { LabelList } from './container/LabelList';
+import { StatusList } from './container/StatusList';
 
 export const IssuesPage: FC = () => {
   const [params, setParams] = useState<IssuesRequestParams>({
@@ -32,6 +34,13 @@ export const IssuesPage: FC = () => {
       labels: params.labels.includes(id)
         ? params.labels.filter((lId) => lId !== id)
         : [...params.labels, id]
+    });
+  };
+
+  const handleStatusSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setParams({
+      ...params,
+      status: e.target.value
     });
   };
 
@@ -71,12 +80,11 @@ export const IssuesPage: FC = () => {
         </section>
         <aside>
           <LabelList onClick={handleLabelSelect} selected={params.labels} />
-          {/* <h3>Status</h3>
-        <StatusSelect value={status} onChange={handleSetStatus} />
-        <hr />
-        <Link className='button' to='/add'>
-          Add issue
-        </Link> */}
+          <StatusList onClick={handleStatusSelect} selected={params.status} />
+          <hr />
+          <Link className='button' to='/add'>
+            Add issue
+          </Link>
         </aside>
       </main>
     </div>
