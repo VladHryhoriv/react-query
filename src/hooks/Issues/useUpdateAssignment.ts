@@ -24,7 +24,7 @@ export const useUpdateAssignment = (): UseMutationResult<
     },
     {
       onSuccess: (_data, variables) => {
-        toast.success('Issue assignment was updated !)');
+        toast.success('Successfully updated !)');
         queryClient.invalidateQueries(issueKeys.issue(variables.id));
       },
       onError: () => {
