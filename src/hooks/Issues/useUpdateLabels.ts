@@ -1,32 +1,34 @@
 import { useMutation, UseMutationResult } from 'react-query';
 import { toast } from 'react-toastify';
 import { Issue } from 'enities/Issue.entity';
+import { Label } from 'enities/Label.entity';
 import { issueKeys } from 'enums/queries';
-import { fetchUpdateIssueStatus } from 'services/API';
-import { IssueDTO, UpdateStatusParams } from 'types/Issues';
+import { fetchUpdateIssueLabels } from 'services/API';
+import { IssueDTO } from 'types/Issues';
 import { queryClient } from 'utils/queryClient';
 
-type TParams = {
+type MutationParams = {
+  labels: Array<Label['id']>;
   id: Issue['number'];
-} & UpdateStatusParams;
+};
 
-export const useUpdateStatus = (): UseMutationResult<
+export const useUpdateLabels = (): UseMutationResult<
   IssueDTO,
   Error,
-  TParams,
+  MutationParams,
   IssueDTO
 > => {
   return useMutation(
-    async ({ id, status }) => {
-      return await fetchUpdateIssueStatus(id, { status });
+    async ({ id, labels }) => {
+      return await fetchUpdateIssueLabels(id, { labels });
     },
     {
       onSuccess: (_data, variables) => {
+        toast.success('Successfully updated !)');
         queryClient.invalidateQueries(issueKeys.issue(variables.id));
-        toast.success('Successfully updated !');
       },
       onError: () => {
-        toast.error('Fail to update issue status(');
+        toast.error('Fail to update issue labels(');
       }
     }
   );

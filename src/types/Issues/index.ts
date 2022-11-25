@@ -1,4 +1,5 @@
 import { Issue } from 'enities/Issue.entity';
+import { Label } from 'enities/Label.entity';
 
 export type IssueDTO = {
   labels: Array<string>;
@@ -29,4 +30,7 @@ export type UpdateStatusParams = {
 };
 export type UpdateAssigmentParams = {
   assignee: string;
+};
+export type UpdateLabelsParams = {
+  labels: Array<Label['id']>;
 };

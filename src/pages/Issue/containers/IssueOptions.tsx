@@ -1,11 +1,14 @@
 import { FC } from 'react';
+import { Label } from 'enities/Label.entity';
 import { User } from 'enities/User.entity';
 import { useIssue } from 'hooks/Issues/useIssue';
 import { useUpdateAssignment } from 'hooks/Issues/useUpdateAssignment';
+import { useUpdateLabels } from 'hooks/Issues/useUpdateLabels';
 import { useUpdateStatus } from 'hooks/Issues/useUpdateStatus';
 import { StatusList } from 'pages/Issues/container/StatusList';
 
 import { IssueAssignment } from './IssueAssignment';
+import { IssueLabels } from './IssueLabels';
 
 type TProps = {
   issue?: string;
@@ -15,6 +18,7 @@ export const IssueOptions: FC<TProps> = ({ issue }) => {
   const { data, isLoading } = useIssue(Number(issue));
   const statusMutate = useUpdateStatus();
   const assigneeMutate = useUpdateAssignment();
+  const labelsMutate = useUpdateLabels();
 
   const handleSetStaus = (status: React.ChangeEvent<HTMLSelectElement>) => {
     statusMutate.mutate({
@@ -22,8 +26,11 @@ export const IssueOptions: FC<TProps> = ({ issue }) => {
       status: status.target.value
     });
   };
-  const handleSetAssignee = (id: User['id']) => {
-    assigneeMutate.mutate({ id: Number(data?.number), assignee: id });
+  const handleSetAssignee = (assignee: User['id']) => {
+    assigneeMutate.mutate({ id: Number(data?.number), assignee });
+  };
+  const handleSetLabels = (labels: Array<Label['id']>) => {
+    labelsMutate.mutate({ id: Number(data?.number), labels });
   };
 
   if (isLoading || !data) {
@@ -42,12 +49,7 @@ export const IssueOptions: FC<TProps> = ({ issue }) => {
         </div>
       </div>
       <IssueAssignment user={data.assignee} onClick={handleSetAssignee} />
-      {/* {!!issueDetails.data && (
-            <IssueLabels
-              labels={issueDetails.data.labels}
-              issueNumber={issueDetails.data.number.toString()}
-            />
-          )} */}
+      <IssueLabels onClick={handleSetLabels} issueLabels={data.labels} />
     </aside>
   );
 };
