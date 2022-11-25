@@ -9,9 +9,9 @@ import { defaultToasOptions } from 'config/toast/index.ts';
 import { issueKeys } from 'enums/queries';
 import { useInfiniteIssueComments } from 'hooks/Comments/useInfiniteIssueComments';
 import { useIssue } from 'hooks/Issues/useIssue';
-import { useUpdateStatus } from 'hooks/Issues/useUpdateStatus';
 import { useInfinityAction } from 'hooks/useInfinityAction';
-import { StatusList } from 'pages/Issues/container/StatusList';
+
+import { IssueOptions } from './containers/IssueOptions';
 
 type TParams = {
   id: string;
@@ -20,7 +20,6 @@ type TParams = {
 export const IssuePage: FC = () => {
   const params = useParams<TParams>();
   const navigate = useNavigate();
-  const { mutate } = useUpdateStatus();
 
   const { data, isLoading, isError, error, status } = useIssue(
     Number(params.id)
@@ -39,10 +38,6 @@ export const IssuePage: FC = () => {
     }
 
     comments.fetchNextPage();
-  };
-
-  const handleSetStaus = (status: React.ChangeEvent<HTMLSelectElement>) => {
-    mutate({ id: Number(data?.number), status: status.target.value });
   };
 
   useInfinityAction(document, fetchNextPage, 100);
@@ -68,34 +63,7 @@ export const IssuePage: FC = () => {
             )}
           {comments.isFetchingNextPage && <Loader />}
         </section>
-        <aside>
-          <div className='issue-options'>
-            <div>
-              <StatusList
-                onClick={handleSetStaus}
-                selected={data?.status || ''}
-              />
-            </div>
-          </div>
-          {/* {!!issueDetails.data && (
-            <IssueStatus
-              status={issueDetails.data.status}
-              issueNumber={issueDetails.data.number.toString()}
-            />
-          )} */}
-          {/* {!!issueDetails.data && (
-            <IssueAssignment
-              assignee={issueDetails.data.assignee}
-              issueNumber={issueDetails.data.number.toString()}
-            />
-          )}
-          {!!issueDetails.data && (
-            <IssueLabels
-              labels={issueDetails.data.labels}
-              issueNumber={issueDetails.data.number.toString()}
-            />
-          )} */}
-        </aside>
+        <IssueOptions issue={params.id} />
       </main>
     </div>
   );

@@ -5,6 +5,7 @@ import {
   IssueDTO,
   IssueRequestParms,
   IssuesRequestParams,
+  UpdateAssigmentParams,
   UpdateStatusParams
 } from 'types/Issues';
 import { api } from 'utils/APIHandler';
@@ -52,4 +53,11 @@ export const fetchUpdateIssueStatus = (
   body: UpdateStatusParams
 ): Promise<IssueDTO> => {
   return api.put<UpdateStatusParams, IssueDTO>(`/api/issues/${id}`, body);
+};
+
+export const fetchUpdateIssueAssignment = (
+  id: Issue['number'],
+  body: UpdateAssigmentParams
+): Promise<IssueDTO> => {
+  return api.put<UpdateAssigmentParams, IssueDTO>(`/api/issues/${id}`, body);
 };

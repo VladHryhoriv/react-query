@@ -27,3 +27,6 @@ export type TIssueStatus =
 export type UpdateStatusParams = {
   status: string;
 };
+export type UpdateAssigmentParams = {
+  assignee: string;
+};
