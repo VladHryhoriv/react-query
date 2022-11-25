@@ -1,7 +1,12 @@
 import { Issue } from 'enities/Issue.entity';
 import queryString from 'query-string';
 import { CommentDTO } from 'types/Comment';
-import { IssueDTO, IssueRequestParms, IssuesRequestParams } from 'types/Issues';
+import {
+  IssueDTO,
+  IssueRequestParms,
+  IssuesRequestParams,
+  UpdateStatusParams
+} from 'types/Issues';
 import { api } from 'utils/APIHandler';
 
 const isMockAPI: boolean = !!process.env.REACT_IS_MOCK_API;
@@ -21,11 +26,13 @@ export const fetchIssues = (
     arrayFormat: 'bracket'
   });
 
-  return api<IssueDTO[]>(`/api/issues${requestParams && `?${requestParams}`}`);
+  return api.get<IssueDTO[]>(
+    `/api/issues${requestParams && `?${requestParams}`}`
+  );
 };
 
 export const fetchIssue = (number: Issue['number']): Promise<IssueDTO> => {
-  return api<IssueDTO>(`/api/issues/${number}`);
+  return api.get<IssueDTO>(`/api/issues/${number}`);
 };
 
 export const fetchIssueComments = (
@@ -35,5 +42,14 @@ export const fetchIssueComments = (
 
   const requestParams = queryString.stringify(params);
 
-  return api<CommentDTO[]>(`/api/issues/${number}/comments?${requestParams}`);
+  return api.get<CommentDTO[]>(
+    `/api/issues/${number}/comments?${requestParams}`
+  );
+};
+
+export const fetchUpdateIssueStatus = (
+  id: Issue['number'],
+  body: UpdateStatusParams
+): Promise<IssueDTO> => {
+  return api.put<UpdateStatusParams, IssueDTO>(`/api/issues/${id}`, body);
 };

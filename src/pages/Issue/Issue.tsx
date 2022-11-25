@@ -9,7 +9,9 @@ import { defaultToasOptions } from 'config/toast/index.ts';
 import { issueKeys } from 'enums/queries';
 import { useInfiniteIssueComments } from 'hooks/Comments/useInfiniteIssueComments';
 import { useIssue } from 'hooks/Issues/useIssue';
+import { useUpdateStatus } from 'hooks/Issues/useUpdateStatus';
 import { useInfinityAction } from 'hooks/useInfinityAction';
+import { StatusList } from 'pages/Issues/container/StatusList';
 
 type TParams = {
   id: string;
@@ -18,6 +20,7 @@ type TParams = {
 export const IssuePage: FC = () => {
   const params = useParams<TParams>();
   const navigate = useNavigate();
+  const { mutate } = useUpdateStatus();
 
   const { data, isLoading, isError, error, status } = useIssue(
     Number(params.id)
@@ -38,6 +41,10 @@ export const IssuePage: FC = () => {
     comments.fetchNextPage();
   };
 
+  const handleSetStaus = (status: React.ChangeEvent<HTMLSelectElement>) => {
+    mutate({ id: Number(data?.number), status: status.target.value });
+  };
+
   useInfinityAction(document, fetchNextPage, 100);
 
   if (isError) {
@@ -46,7 +53,6 @@ export const IssuePage: FC = () => {
       toastId: 'issue-error'
     });
     navigate(paths.issues());
-    return null;
   }
 
   return (
@@ -62,14 +68,22 @@ export const IssuePage: FC = () => {
             )}
           {comments.isFetchingNextPage && <Loader />}
         </section>
-        {/* <aside>
-          {!!issueDetails.data && (
+        <aside>
+          <div className='issue-options'>
+            <div>
+              <StatusList
+                onClick={handleSetStaus}
+                selected={data?.status || ''}
+              />
+            </div>
+          </div>
+          {/* {!!issueDetails.data && (
             <IssueStatus
               status={issueDetails.data.status}
               issueNumber={issueDetails.data.number.toString()}
             />
-          )}
-          {!!issueDetails.data && (
+          )} */}
+          {/* {!!issueDetails.data && (
             <IssueAssignment
               assignee={issueDetails.data.assignee}
               issueNumber={issueDetails.data.number.toString()}
@@ -80,8 +94,8 @@ export const IssuePage: FC = () => {
               labels={issueDetails.data.labels}
               issueNumber={issueDetails.data.number.toString()}
             />
-          )}
-        </aside> */}
+          )} */}
+        </aside>
       </main>
     </div>
   );

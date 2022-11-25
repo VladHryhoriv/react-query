@@ -23,3 +23,7 @@ export type TIssueStatus =
   | 'inProgress'
   | 'done'
   | 'cancelled';
+
+export type UpdateStatusParams = {
+  status: string;
+};
