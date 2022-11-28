@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { IssueListItem } from 'components/IssueListItem';
 import { SingleForm } from 'components/SingleForm';
 import { Label } from 'enities/Label.entity';
-import { useIssues } from 'hooks/Issues/useIssues';
+import { useIssues } from 'hooks/UseIssues/useIssues';
 import { IssuesRequestParams } from 'types/Issues';
 
 import { LabelList } from './container/LabelList';

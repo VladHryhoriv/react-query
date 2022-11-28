@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { GoGear } from 'react-icons/go';
 import { Issue } from 'enities/Issue.entity';
 import { Label } from 'enities/Label.entity';
-import { useLabels } from 'hooks/Label/useLabels';
+import { useLabels } from 'hooks/UseLabels/useLabels';
 
 type TProps = {
   onClick: (labels: Array<Label['id']>) => void;

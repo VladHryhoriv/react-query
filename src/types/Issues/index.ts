@@ -25,12 +25,8 @@ export type TIssueStatus =
   | 'done'
   | 'cancelled';
 
-export type UpdateStatusParams = {
-  status: string;
-};
-export type UpdateAssigmentParams = {
-  assignee: string;
-};
-export type UpdateLabelsParams = {
-  labels: Array<Label['id']>;
+export type UpdateIssueParams = {
+  assignee?: string;
+  status?: string;
+  labels?: Array<Label['id']>;
 };

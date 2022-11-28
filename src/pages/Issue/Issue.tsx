@@ -7,9 +7,9 @@ import { Loader } from 'components/Loader';
 import { paths } from 'config/paths';
 import { defaultToasOptions } from 'config/toast/index.ts';
 import { issueKeys } from 'enums/queries';
-import { useInfiniteIssueComments } from 'hooks/Comments/useInfiniteIssueComments';
-import { useIssue } from 'hooks/Issues/useIssue';
+import { useInfiniteIssueComments } from 'hooks/UseInfiniteIssueComments/useInfiniteIssueComments';
 import { useInfinityAction } from 'hooks/useInfinityAction';
+import { useIssue } from 'hooks/UseIssue/useIssue';
 
 import { IssueOptions } from './containers/IssueOptions';
 

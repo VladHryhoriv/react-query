@@ -1,26 +1,25 @@
 import { useMutation, UseMutationResult } from 'react-query';
 import { toast } from 'react-toastify';
 import { Issue } from 'enities/Issue.entity';
-import { User } from 'enities/User.entity';
 import { issueKeys } from 'enums/queries';
-import { fetchUpdateIssueAssignment } from 'services/API';
-import { IssueDTO } from 'types/Issues';
+import { fetchUpdateIssue } from 'services/API';
+import { IssueDTO, UpdateIssueParams } from 'types/Issues';
 import { queryClient } from 'utils/queryClient';
 
 type MutationParams = {
-  assignee: User['id'];
+  params: UpdateIssueParams;
   id: Issue['number'];
 };
 
-export const useUpdateAssignment = (): UseMutationResult<
+export const useIssueUpdate = (): UseMutationResult<
   IssueDTO,
   Error,
   MutationParams,
   IssueDTO
 > => {
   return useMutation(
-    async ({ id, assignee }) => {
-      return await fetchUpdateIssueAssignment(id, { assignee });
+    async ({ id, params }) => {
+      return await fetchUpdateIssue(id, params);
     },
     {
       onSuccess: (_data, variables) => {
@@ -28,7 +27,7 @@ export const useUpdateAssignment = (): UseMutationResult<
         queryClient.invalidateQueries(issueKeys.issue(variables.id));
       },
       onError: () => {
-        toast.error('Fail to update issue assignment(');
+        toast.error('Fail to update issue(');
       }
     }
   );

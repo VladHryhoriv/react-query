@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { GoGear } from 'react-icons/go';
 import { Issue } from 'enities/Issue.entity';
 import { User } from 'enities/User.entity';
-import { useUsers } from 'hooks/User/useUsers';
+import { useUsers } from 'hooks/UseUsers/useUsers';
 
 type TProps = {
   onClick: (id: User['id']) => void;

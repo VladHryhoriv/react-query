@@ -1,10 +1,8 @@
 import { FC } from 'react';
 import { Label } from 'enities/Label.entity';
 import { User } from 'enities/User.entity';
-import { useIssue } from 'hooks/Issues/useIssue';
-import { useUpdateAssignment } from 'hooks/Issues/useUpdateAssignment';
-import { useUpdateLabels } from 'hooks/Issues/useUpdateLabels';
-import { useUpdateStatus } from 'hooks/Issues/useUpdateStatus';
+import { useIssue } from 'hooks/UseIssue/useIssue';
+import { useIssueUpdate } from 'hooks/UseIssueUpdate/useIssueUpdate';
 import { StatusList } from 'pages/Issues/container/StatusList';
 
 import { IssueAssignment } from './IssueAssignment';
@@ -16,21 +14,19 @@ type TProps = {
 
 export const IssueOptions: FC<TProps> = ({ issue }) => {
   const { data, isLoading } = useIssue(Number(issue));
-  const statusMutate = useUpdateStatus();
-  const assigneeMutate = useUpdateAssignment();
-  const labelsMutate = useUpdateLabels();
+  const issueMutate = useIssueUpdate();
 
   const handleSetStaus = (status: React.ChangeEvent<HTMLSelectElement>) => {
-    statusMutate.mutate({
+    issueMutate.mutate({
       id: Number(data?.number),
-      status: status.target.value
+      params: { status: status.target.value }
     });
   };
   const handleSetAssignee = (assignee: User['id']) => {
-    assigneeMutate.mutate({ id: Number(data?.number), assignee });
+    issueMutate.mutate({ id: Number(data?.number), params: { assignee } });
   };
   const handleSetLabels = (labels: Array<Label['id']>) => {
-    labelsMutate.mutate({ id: Number(data?.number), labels });
+    issueMutate.mutate({ id: Number(data?.number), params: { labels } });
   };
 
   if (isLoading || !data) {

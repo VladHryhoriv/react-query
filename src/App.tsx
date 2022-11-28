@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { Link, Navigate, Route, Routes, useMatch } from 'react-router-dom';
 import { Loader } from 'components/Loader';
 import { paths } from 'config/paths';
-import { useLabels } from 'hooks/Label/useLabels';
-import { useUsers } from 'hooks/User/useUsers';
+import { useLabels } from 'hooks/UseLabels/useLabels';
+import { useUsers } from 'hooks/UseUsers/useUsers';
 import { IssuePage, IssuesPage } from 'lazy-pages';
 
 export const App: FC = () => {

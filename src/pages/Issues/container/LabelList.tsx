@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { toast } from 'react-toastify';
 import { LabelButton } from 'components/LabelButton';
 import { Label } from 'enities/Label.entity';
-import { useLabels } from 'hooks/Label/useLabels';
+import { useLabels } from 'hooks/UseLabels/useLabels';
 
 type Props = {
   onClick: (id: Label['id']) => void;
@@ -10,13 +10,13 @@ type Props = {
 };
 
 export const LabelList: FC<Props> = ({ onClick, selected }) => {
-  const { data, isLoading, isError, error } = useLabels();
+  const { data, isLoading, isSuccess, isError, error } = useLabels();
 
   if (isLoading) {
     return <p>Loading ...</p>;
   }
 
-  if (isError || !data?.size) {
+  if (isError || !isSuccess) {
     toast.error(error?.message || 'Failed to load labels');
   }
 

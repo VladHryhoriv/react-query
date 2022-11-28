@@ -18,7 +18,7 @@ export const useLabels = (
 
       return labels;
     },
-    { retry: 1, ...options }
+    { ...options }
   );
 
   return data;
