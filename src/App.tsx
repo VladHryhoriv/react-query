@@ -4,7 +4,7 @@ import { Loader } from 'components/Loader';
 import { paths } from 'config/paths';
 import { useLabels } from 'hooks/UseLabels/useLabels';
 import { useUsers } from 'hooks/UseUsers/useUsers';
-import { IssuePage, IssuesPage } from 'lazy-pages';
+import { AddIssuePage, IssuePage, IssuesPage } from 'lazy-pages';
 
 export const App: FC = () => {
   const isRootPage = useMatch(paths.issues());
@@ -28,6 +28,7 @@ export const App: FC = () => {
         <Routes>
           <Route path={paths.issues()} element={<IssuesPage />} />
           <Route path={paths.issue()} element={<IssuePage />} />
+          <Route path={paths.addIssue()} element={<AddIssuePage />} />
           <Route path='*' element={<Navigate to={paths.issues()} />} />
         </Routes>
       </div>

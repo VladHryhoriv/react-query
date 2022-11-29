@@ -2,6 +2,7 @@ import { Issue } from 'enities/Issue.entity';
 import queryString from 'query-string';
 import { CommentDTO } from 'types/Comment';
 import {
+  AddIssueParams,
   IssueDTO,
   IssueRequestParms,
   IssuesRequestParams,
@@ -52,4 +53,8 @@ export const fetchUpdateIssue = (
   body: UpdateIssueParams
 ): Promise<IssueDTO> => {
   return api.put<UpdateIssueParams, IssueDTO>(`/api/issues/${id}`, body);
+};
+
+export const fetchAddIssue = (body: AddIssueParams): Promise<IssueDTO> => {
+  return api.post<AddIssueParams, IssueDTO>('api/issues', body);
 };

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { IssueListItem } from 'components/IssueListItem';
 import { SingleForm } from 'components/SingleForm';
+import { paths } from 'config/paths';
 import { Label } from 'enities/Label.entity';
 import { useIssues } from 'hooks/UseIssues/useIssues';
 import { IssuesRequestParams } from 'types/Issues';
@@ -82,7 +83,7 @@ export const IssuesPage: FC = () => {
           <LabelList onClick={handleLabelSelect} selected={params.labels} />
           <StatusList onClick={handleStatusSelect} selected={params.status} />
           <hr />
-          <Link className='button' to='/add'>
+          <Link className='button' to={paths.addIssue()}>
             Add issue
           </Link>
         </aside>

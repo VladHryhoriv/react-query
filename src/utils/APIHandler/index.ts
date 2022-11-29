@@ -7,7 +7,7 @@ export async function fetchHandler<T>(
     body: config?.body ? JSON.stringify(config.body) : null
   });
 
-  if (response.status === 200) {
+  if (response.status >= 200 && response.status < 300) {
     const result = await response.json();
 
     if (result.error) {

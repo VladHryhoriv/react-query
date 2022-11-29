@@ -224,6 +224,9 @@ form input {
   background-color: black;
   color: white;
 }
+.input-error {
+  border: solid 1px var(--red) !important;
+}
 .comment-count {
   display: flex;
   justify-content: center;

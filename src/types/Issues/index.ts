@@ -30,3 +30,8 @@ export type UpdateIssueParams = {
   status?: string;
   labels?: Array<Label['id']>;
 };
+
+export type AddIssueParams = {
+  title: string;
+  comment: string;
+};
