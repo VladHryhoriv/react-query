@@ -11,7 +11,7 @@ export const issueKeys = {
     [
       { ...issueKeys.root[0], number, page, entity: QUERY_ENTITIES.comments }
     ] as const,
-  issuesSearch: (params: IssuesRequestParams) =>
+  issuesSearch: (params?: IssuesRequestParams) =>
     [
       {
         ...issueKeys.root[0],

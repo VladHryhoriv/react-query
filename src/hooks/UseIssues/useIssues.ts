@@ -8,7 +8,7 @@ import { IssuesRequestParams } from 'types/Issues';
 import { queryClient } from 'utils/queryClient';
 
 export const useIssues = (
-  params: IssuesRequestParams,
+  params?: IssuesRequestParams,
   options?: Omit<UseQueryOptions<Issue[], Error>, 'queryKey' | 'queryFn'>
 ): UseQueryResult<Issue[], Error> => {
   const data = useQuery<Issue[], Error>(

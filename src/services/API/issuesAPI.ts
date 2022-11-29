@@ -14,13 +14,13 @@ const isMockAPI: boolean = !!process.env.REACT_IS_MOCK_API;
 const issues: IssueDTO[] = require('../../mocks/data/issues.json');
 
 export const fetchIssues = (
-  params: IssuesRequestParams
+  params?: IssuesRequestParams
 ): Promise<IssueDTO[]> => {
   if (isMockAPI) {
     return Promise.resolve(issues);
   }
 
-  const requestParams = queryString.stringify(params, {
+  const requestParams = queryString.stringify(params || {}, {
     skipEmptyString: true,
     skipNull: true,
     arrayFormat: 'bracket'
